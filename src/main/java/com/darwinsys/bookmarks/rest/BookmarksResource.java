@@ -22,20 +22,25 @@ public class BookmarksResource {
 	@Path("/topics")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Topic> topics() {
-		List<Topic> results;
-		results = em.createQuery("from Topic").getResultList();
+		List<Topic> results = em.createQuery("from Topic").getResultList();
         return results;
     }
 
     @GET
-	@Path("/bookmarks/{topic}")
+	@Path("/bookmarksByTopicId/{topic}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Bookmark> bookmarksInTopic(@PathParam("topic") long topic) {
-		List<Bookmark> results;
-		results = em.
+    public List<Bookmark> bookmarksByTopicId(@PathParam("topic") long topic) {
+		List<Bookmark> results = em.
 			createQuery("from Bookmark where topic_id = ?1").
 			setParameter(1, topic).
 			getResultList();
         return results;
+    }
+
+    @GET
+	@Path("/bookmark/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Bookmark bookmarkById(@PathParam("id") long id) {
+		return em.find(Bookmark.class, id);
     }
 }
