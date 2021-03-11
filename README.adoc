@@ -5,15 +5,32 @@ among others.
 
 This project uses Quarkus, "the Supersonic Subatomic Java Framework."
 
-Prerequisites:
-	You need a modern Java installed and on your PATH, and Apache Maven installed and on PATH.
+== Prerequisites:
 
-Startup: 
+You need a modern Java installed and on your PATH, and Apache Maven installed and on PATH.
 
-# In src/main/resources, copy the file `application-resources.properties.sample` to `application-resources.properties`
-# Run `mvn quarkus:dev`
+== Startup: 
+
+* In src/main/resources, copy the file `application-resources.properties.sample` to `application-resources.properties`
+* Then, run `mvn quarkus:dev`
+* Finally, open a browser to http://localhost:8080/[].
 
 To use a real database, make the obvious changes in two files, `application-resources.properties` and `src/main/resources/META-INF/persistence.xml`
 
+== Quarkus
+
+A simplification layer for building microservices. Lots of tooling. Initial creation of this
+project, including a working "Hello, world" REST service, was created with just this:
+
+	mvn io.quarkus:quarkus-maven-plugin:1.12.1.Final:create \
+    -DprojectGroupId=com.darwinsys \
+    -DprojectArtifactId=bookmarks.backend \
+    -DclassName="com.darwinsys.quarkus.BookmarksResource" \
+    -Dpath="/hello"
+	cd bookmarks.backend
+
 If you want to learn more about Quarkus, most of the original README is in README.quarkus.md
+
+If you want to build a project with more capabilities than are used here (lots are supported), visit
+https://code.quarkus.io[], check some boxes, and click `Generate your application`.
 
