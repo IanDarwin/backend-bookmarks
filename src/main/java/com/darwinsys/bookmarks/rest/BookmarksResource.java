@@ -38,7 +38,7 @@ public class BookmarksResource {
     }
 
     @GET
-	@Path("/bookmark/{id}")
+	@Path("/bookmarkById/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Bookmark bookmarkById(@PathParam("id") long id) {
 		return em.find(Bookmark.class, id);
