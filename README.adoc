@@ -9,9 +9,11 @@ Prerequisites:
 	You need a modern Java installed and on your PATH, and Apache Maven installed and on PATH.
 
 Startup: 
-	1) in src/main/resources, copy the file application-resources.properties.sample to
-		application-resources.properties
-	2) mvn quarkus:dev
+
+# In src/main/resources, copy the file `application-resources.properties.sample` to `application-resources.properties`
+# Run `mvn quarkus:dev`
+
+To use a real database, make the obvious changes in two files, `application-resources.properties` and `src/main/resources/META-INF/persistence.xml`
 
 If you want to learn more about Quarkus, most of the original README is in README.quarkus.md
 
