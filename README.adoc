@@ -5,7 +5,7 @@ This project provides read-only access to a a tiny sample of bookmarks.
 
 In the real deployment this is excerpted from, a different application writes entries 
 into a PostgreSQL or MariaDB relational database that this backend reads from
-(well, you could call a few-line Unix shell script an application; it's useful on its own).
+(if you'd call https://github.com/IanDarwin/scripts/blob/master/bookmark[a few-line Unix shell script] an application).
 And a third application displays lists for the user to review and open pages in
 the bookmarks.
 
