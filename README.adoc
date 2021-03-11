@@ -5,6 +5,9 @@ among others.
 
 This project uses Quarkus, "the Supersonic Subatomic Java Framework."
 
+Prerequisites:
+	You need a modern Java installed and on your PATH, and Apache Maven installed and on PATH.
+
 Startup: 
 	1) in src/main/resources, copy the file application-resources.properties.sample to
 		application-resources.properties
