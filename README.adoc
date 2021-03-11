@@ -9,7 +9,7 @@ into a PostgreSQL or MariaDB relational database that this backend reads from
 And a third application displays lists for the user to review and open pages in
 the bookmarks.
 
-This project uses Quarkus, "the Supersonic Subatomic Java Framework."
+This project uses https://quarkus.io[Quarkus], "the Supersonic Subatomic Java Framework."
 
 == Prerequisites:
 
