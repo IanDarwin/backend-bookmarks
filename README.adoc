@@ -1,10 +1,14 @@
 == Bookmarks REST via quarkus and Java EE
 
-This project displays Ian's saved web bookmarks, for use by the bookmarks.flutter application.
+This project displays Ian's saved web bookmarks, for use by the bookmarks.flutter application
+among others.
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project uses Quarkus, "the Supersonic Subatomic Java Framework."
 
-Startup: mvn quarkus:dev
+Startup: 
+	1) in src/main/resources, copy the file application-resources.properties.sample to
+		application-resources.properties
+	2) mvn quarkus:dev
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+If you want to learn more about Quarkus, most of the original README is in README.quarkus.md
 
