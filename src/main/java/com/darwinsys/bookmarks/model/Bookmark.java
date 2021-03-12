@@ -31,7 +31,7 @@ public class Bookmark {
 	}
 
 	public String toHtml() {
-		return String.format("<a href='%s'>%s</a>'", url, description);
+		return String.format("<a href='%s'>%s</a>", url, description);
 	}
 	public long getId() {
 		return id;
