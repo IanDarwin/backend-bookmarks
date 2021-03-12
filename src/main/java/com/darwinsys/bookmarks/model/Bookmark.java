@@ -30,6 +30,9 @@ public class Bookmark {
 		return String.format("Bookmark(topic %s, url %s, text %s", topic, url, description);
 	}
 
+	public String toHtml() {
+		return String.format("<a href='%s'>%s</a>'", url, description);
+	}
 	public long getId() {
 		return id;
 	}
