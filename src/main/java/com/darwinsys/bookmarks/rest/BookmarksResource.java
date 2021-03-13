@@ -38,6 +38,16 @@ public class BookmarksResource {
     }
 
     @GET
+	@Path("/bookmarksSearch/{pattern}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Bookmark> bookmarksByTopicId(@PathParam("pattern") String pattern) {
+		return em.
+			createQuery("from Bookmark where description like lower(%?1%)").
+			setParameter(1, pattern.toLowerCase()).
+			getResultList();
+    }
+
+    @GET
 	@Path("/bookmarkById/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Bookmark bookmarkById(@PathParam("id") long id) {

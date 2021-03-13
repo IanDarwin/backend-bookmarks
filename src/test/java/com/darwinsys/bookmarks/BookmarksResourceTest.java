@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 public class BookmarksResourceTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testGetById() {
         given()
           .when().get("/rs/bookmarkById/1")
           .then()
@@ -18,4 +18,12 @@ public class BookmarksResourceTest {
              .body(containsString("economy"));
     }
 
+    @Test
+    public void testSearch() {
+        given()
+          .when().get("/bookmarksSearch/economy")
+          .then()
+             .statusCode(200)
+             .body(containsString("economy"));
+    }
 }
