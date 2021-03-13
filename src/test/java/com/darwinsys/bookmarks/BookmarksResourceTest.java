@@ -12,7 +12,7 @@ public class BookmarksResourceTest {
     @Test
     public void testGetById() {
         given()
-          .when().get("/rs/bookmarkById/1")
+          .when().get("/bookmarkById/1")
           .then()
              .statusCode(200)
              .body(containsString("economy"));
