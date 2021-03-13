@@ -3,7 +3,8 @@ package com.darwinsys.bookmarks.rest;
 import com.darwinsys.bookmarks.model.Bookmark;
 import com.darwinsys.bookmarks.model.Topic;
 
-import java.util.List;
+import java.util.*;
+import java.util.regex.*;
 
 import javax.persistence.*;
 import javax.ws.rs.GET;
@@ -48,6 +49,17 @@ public class BookmarksResource {
 			setParameter(1, likePattern).
 			getResultList();
     }
+
+    @GET
+	@Path("bookmarksRegex/{regex}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Bookmark> bookmarksRegex(@PathParam("regex") String regexString) {
+		List<Bookmark> results = new ArrayList();
+		Pattern patt = Pattern.compile(regexString);
+		em.createQuery("from Bookmark", Bookmark.class).getResultList().
+			forEach(b -> { if (patt.matcher(b.getDescription()).find()) results.add(b); } );
+		return results;
+	}
 
     @GET
 	@Path("bookmarkById/{id}")
