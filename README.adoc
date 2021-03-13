@@ -5,7 +5,8 @@ This project provides read-only access to a a tiny sample of bookmarks.
 
 In the real deployment this is excerpted from, a different application writes entries 
 into a PostgreSQL or MariaDB relational database that this backend reads from
-(if you'd call https://github.com/IanDarwin/scripts/blob/master/bookmark[a few-line Unix shell script] an application).
+(if you'd call https://github.com/IanDarwin/scripts/blob/master/bookmark[a few-line Unix shell script]
+an application).
 And a third application displays lists for the user to review and open pages in
 the bookmarks.
 
@@ -15,15 +16,24 @@ This project uses https://quarkus.io[Quarkus], "the Supersonic Subatomic Java Fr
 
 You need a modern Java installed and on your PATH, and Apache Maven installed and on PATH.
 
-== Startup: 
+== BEFORE RUNNING
 
 * In src/main/resources, copy the file `application-resources.properties.sample` to `application-resources.properties`
-* Then, run `mvn quarkus:dev`
+** If you miss this step you will get "no datasource" messages!
+
+== Startup: 
+
+* Run `mvn quarkus:dev`
 * Finally, open a browser to http://localhost:8080/[].
 
 To use a real database, make the obvious changes in two files, `application-resources.properties` and `src/main/resources/META-INF/persistence.xml`
 
-== Quarkus
+== Packaging etc.
+
+To run tests, or package, you have to use the `mvnw` front-end to Maven.
+See README-quarkus.md for details.
+
+== About Quarkus
 
 A simplification layer for building microservices. Lots of tooling. Initial creation of this
 project, including a working "Hello, world" REST service, was created with just this:
