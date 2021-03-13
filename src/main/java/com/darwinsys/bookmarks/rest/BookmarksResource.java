@@ -12,14 +12,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
-@Path("/rs")
+@Path("")
 public class BookmarksResource {
 
 	@PersistenceContext
 	EntityManager em;
 
     @GET
-	@Path("/topics")
+	@Path("topics")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Topic> topics() {
 		List<Topic> results = em.createQuery("from Topic").getResultList();
@@ -27,7 +27,7 @@ public class BookmarksResource {
     }
 
     @GET
-	@Path("/bookmarksByTopicId/{topic}")
+	@Path("bookmarksByTopicId/{topic}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Bookmark> bookmarksByTopicId(@PathParam("topic") long topic) {
 		List<Bookmark> results = em.
@@ -38,17 +38,19 @@ public class BookmarksResource {
     }
 
     @GET
-	@Path("/bookmarksSearch/{pattern}")
+	@Path("bookmarksSearch/{pattern}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Bookmark> bookmarksByTopicId(@PathParam("pattern") String pattern) {
+    public List<Bookmark> bookmarksSearch(@PathParam("pattern") String pattern) {
+		var likePattern = String.format("%%%s%%", pattern.toLowerCase());
+		System.out.println("BookmarksResource::bookmarksBySearch(" + likePattern + ")");
 		return em.
-			createQuery("from Bookmark where description like lower(%?1%)").
-			setParameter(1, pattern.toLowerCase()).
+			createQuery("from Bookmark where description like ?1").
+			setParameter(1, likePattern).
 			getResultList();
     }
 
     @GET
-	@Path("/bookmarkById/{id}")
+	@Path("bookmarkById/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Bookmark bookmarkById(@PathParam("id") long id) {
 		return em.find(Bookmark.class, id);
