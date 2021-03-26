@@ -1,5 +1,6 @@
 package com.darwinsys.bookmarks.rest;
 
+import com.darwinsys.bookmarks.api.BookmarksService;
 import com.darwinsys.bookmarks.model.Bookmark;
 import com.darwinsys.bookmarks.model.Topic;
 
@@ -14,7 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 @Path("")
-public class BookmarksResource {
+public class BookmarksResource implements BookmarksService {
 
 	@PersistenceContext
 	EntityManager em;

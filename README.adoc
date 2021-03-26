@@ -33,6 +33,13 @@ To use a real database, make the obvious changes in two files, `application-reso
 To run tests, or package, you have to use the `mvnw` front-end to Maven.
 See README-quarkus.md for details.
 
+== Docker
+
+I did this already: `./mvnw quarkus:add-extension -Dextensions="container-image-docker"`
+
+To build for docker, try `./mvnw clean package -Dquarkus.container-image.build=true`
+
+
 == About Quarkus
 
 A simplification layer for building microservices. Lots of tooling. Initial creation of this
