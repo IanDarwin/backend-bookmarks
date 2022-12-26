@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Bookmark {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	long id;
 
 	@ManyToOne
