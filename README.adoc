@@ -28,6 +28,12 @@ You need a modern Java installed and on your PATH, and Apache Maven installed an
 
 To use a real database, make the obvious changes in two files, `application-resources.properties` and `src/main/resources/META-INF/persistence.xml`
 
+== TODO
+
+Don't just "Consider adding security." **Do it**, before you ever go live,
+now that this API has some write modes (no longer read-only).
+See, for example, https://quarkus.io/guides/security-basic-authentication-tutorial[].
+
 == Packaging etc.
 
 To run tests, or package, you have to use the `mvnw` front-end to Maven.
@@ -38,7 +44,6 @@ See README-quarkus.md for details.
 I did this already: `./mvnw quarkus:add-extension -Dextensions="container-image-docker"`
 
 To build for docker, try `./mvnw clean package -Dquarkus.container-image.build=true`
-
 
 == About Quarkus
 
