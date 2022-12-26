@@ -4,10 +4,8 @@ import javax.persistence.*;
 
 @Entity
 public class Topic {
-	@Id
-	long id;
-
-	String name;
+	@Id // No generation strategy - inserter must provide!
+	String id;
 	String description;
 
 	// Needed for JPA
@@ -16,19 +14,15 @@ public class Topic {
 
 	// Needed for Q&D demo
 	public Topic(String name) {
-		this.name = name;
+		this.id = name;
 	}
 
 	public String toString() { 
-		return name;
-	}
-
-	public long getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getId() {
+		return id;
 	}
 
 	public String getDescription() {

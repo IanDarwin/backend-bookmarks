@@ -38,12 +38,8 @@ public class Bookmark {
 		return id;
 	}
 
-	public long getTopicId() {
+	public String getTopicId() {
 		return topic.getId();
-	}
-
-	public String getTopicName() {
-		return topic.getName();
 	}
 
 	public String getUrl() {

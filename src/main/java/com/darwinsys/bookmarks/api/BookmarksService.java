@@ -14,7 +14,7 @@ public interface BookmarksService {
 	@GET@Path("topics")
 	public List<Topic> topics();
 	@GET@Path("bookmarksByTopicId/{topic}")
-	public List<Bookmark> bookmarksByTopicId(@PathParam("topic") long topic);
+	public List<Bookmark> bookmarksByTopicId(@PathParam("topic") String topic);
 	@GET@Path("bookmarksSearch/{pattern}")
 	public List<Bookmark> bookmarksSearch(@PathParam("pattern") String pattern);
 	@GET@Path("bookmarksRegex/{regex}")
