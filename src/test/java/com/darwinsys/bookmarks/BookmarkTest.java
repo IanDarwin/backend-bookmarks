@@ -17,20 +17,19 @@ public class BookmarkTest {
         b = new Bookmark("att", url, cut);
 	}
 
-    @Test
-    public void testIdsAreZeroForNewObjs() {
+	@Test
+	public void testIdsAreZeroForNewObjs() {
 		assertEquals(0, b.getId());
 		assertEquals(0, b.getTopicId());
 	}
 	@Test
 	public void testGetMainFields() {
-		assertEquals("att", b.getTopicName());
+		assertEquals("att", b.getId());
 		assertEquals(url, b.getUrl());
 		assertEquals(cut, b.getDescription());
-    }
+	}
 	@Test
 	public void testAsHtml() {
 		assertEquals("<a href='" + url + "'>" + cut + "</a>", b.toHtml());
 	}
-
 }

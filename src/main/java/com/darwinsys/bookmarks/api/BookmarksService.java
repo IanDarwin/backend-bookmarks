@@ -23,5 +23,5 @@ public interface BookmarksService {
 	public Bookmark bookmarkById(@PathParam("id") long id);
 	// Inserts into database and returns new pkey
 	@POST@Path("bookmark")
-	public long addBookmark(Bookmark newBookmark);
+	public long postBookmark(Bookmark newBookmark);
 }
