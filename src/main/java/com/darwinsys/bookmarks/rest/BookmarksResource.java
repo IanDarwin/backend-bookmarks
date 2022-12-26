@@ -76,9 +76,13 @@ public class BookmarksResource implements BookmarksService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public long addBookmark(Bookmark newBookmark) {
-        em.persist(newBookmark);
-        Bookmark inserted = em.merge(newBookmark);
+    public long postBookmark(Bookmark bookmark) {
+        if (bookmark.getId() == 0) {
+            em.persist(bookmark);
+        } else {
+            em.merge(bookmark);
+        }
+        Bookmark inserted = em.merge(bookmark);
         return inserted.getId();
     }
 }
