@@ -21,4 +21,7 @@ public interface BookmarksService {
 	public List<Bookmark> bookmarksRegex(@PathParam("regex") String regexString);
 	@GET@Path("bookmarkById/{id}")
 	public Bookmark bookmarkById(@PathParam("id") long id);
+	// Inserts into database and returns new pkey
+	@POST@Path("bookmark")
+	public long addBookmark(Bookmark newBookmark);
 }
