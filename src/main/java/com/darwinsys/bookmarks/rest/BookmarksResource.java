@@ -8,10 +8,13 @@ import java.util.*;
 import java.util.regex.*;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("")
@@ -67,5 +70,21 @@ public class BookmarksResource implements BookmarksService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Bookmark bookmarkById(@PathParam("id") long id) {
 		return em.find(Bookmark.class, id);
+	}
+
+	// Inserts into database and returns new pkey
+	@POST
+	@Path("bookmark")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Transactional
+	public long postBookmark(Bookmark bookmark) {
+		if (bookmark.getId() == 0) {
+			em.persist(bookmark);
+		} else {
+			em.merge(bookmark);
+		}
+		Bookmark inserted = em.merge(bookmark);
+		return inserted.getId();
 	}
 }

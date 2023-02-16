@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Bookmark {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	long id;
 
 	@ManyToOne
@@ -37,12 +38,8 @@ public class Bookmark {
 		return id;
 	}
 
-	public long getTopicId() {
+	public String getTopicId() {
 		return topic.getId();
-	}
-
-	public String getTopicName() {
-		return topic.getName();
 	}
 
 	public String getUrl() {
