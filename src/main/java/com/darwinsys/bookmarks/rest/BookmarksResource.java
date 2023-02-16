@@ -27,19 +27,22 @@ public class BookmarksResource implements BookmarksService {
 	@Path("topics")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Topic> topics() {
-		List<Topic> results = em.createQuery("from Topic").getResultList();
-		return results;
+		return em.createQuery("from Topic", Topic.class).getResultList();
 	}
 
 	@GET
 	@Path("bookmarksByTopicId/{topic}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Bookmark> bookmarksByTopicId(@PathParam("topic") long topic) {
-		List<Bookmark> results = em.
-			createQuery("from Bookmark where topic_id = ?1").
+		return em.
+			createQuery("from Bookmark where topic_id = ?1", Bookmark.class).
 			setParameter(1, topic).
 			getResultList();
-		return results;
+	}
+
+	@Override
+	public List<Bookmark> bookmarksByTopicId(String topic) {
+		return bookmarksByTopicId((Long.parseLong(topic)));
 	}
 
 	@GET
@@ -49,7 +52,7 @@ public class BookmarksResource implements BookmarksService {
 		var likePattern = String.format("%%%s%%", pattern.toLowerCase());
 		System.out.println("BookmarksResource::bookmarksBySearch(" + likePattern + ")");
 		return em.
-			createQuery("from Bookmark where description like ?1").
+			createQuery("from Bookmark where description like ?1", Bookmark.class).
 			setParameter(1, likePattern).
 			getResultList();
 	}
@@ -58,7 +61,7 @@ public class BookmarksResource implements BookmarksService {
 	@Path("bookmarksRegex/{regex}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Bookmark> bookmarksRegex(@PathParam("regex") String regexString) {
-		List<Bookmark> results = new ArrayList();
+		List<Bookmark> results = new ArrayList<>();
 		Pattern patt = Pattern.compile(regexString);
 		em.createQuery("from Bookmark", Bookmark.class).getResultList().
 			forEach(b -> { if (patt.matcher(b.getDescription()).find()) results.add(b); } );
