@@ -20,41 +20,41 @@ public class BookmarksResource implements BookmarksService {
 	@PersistenceContext
 	EntityManager em;
 
-    @GET
+	@GET
 	@Path("topics")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Topic> topics() {
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Topic> topics() {
 		List<Topic> results = em.createQuery("from Topic").getResultList();
-        return results;
-    }
+		return results;
+	}
 
-    @GET
+	@GET
 	@Path("bookmarksByTopicId/{topic}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Bookmark> bookmarksByTopicId(@PathParam("topic") long topic) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Bookmark> bookmarksByTopicId(@PathParam("topic") long topic) {
 		List<Bookmark> results = em.
 			createQuery("from Bookmark where topic_id = ?1").
 			setParameter(1, topic).
 			getResultList();
-        return results;
-    }
+		return results;
+	}
 
-    @GET
+	@GET
 	@Path("bookmarksSearch/{pattern}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Bookmark> bookmarksSearch(@PathParam("pattern") String pattern) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Bookmark> bookmarksSearch(@PathParam("pattern") String pattern) {
 		var likePattern = String.format("%%%s%%", pattern.toLowerCase());
 		System.out.println("BookmarksResource::bookmarksBySearch(" + likePattern + ")");
 		return em.
 			createQuery("from Bookmark where description like ?1").
 			setParameter(1, likePattern).
 			getResultList();
-    }
+	}
 
-    @GET
+	@GET
 	@Path("bookmarksRegex/{regex}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Bookmark> bookmarksRegex(@PathParam("regex") String regexString) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Bookmark> bookmarksRegex(@PathParam("regex") String regexString) {
 		List<Bookmark> results = new ArrayList();
 		Pattern patt = Pattern.compile(regexString);
 		em.createQuery("from Bookmark", Bookmark.class).getResultList().
@@ -62,10 +62,10 @@ public class BookmarksResource implements BookmarksService {
 		return results;
 	}
 
-    @GET
+	@GET
 	@Path("bookmarkById/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Bookmark bookmarkById(@PathParam("id") long id) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Bookmark bookmarkById(@PathParam("id") long id) {
 		return em.find(Bookmark.class, id);
-    }
+	}
 }
