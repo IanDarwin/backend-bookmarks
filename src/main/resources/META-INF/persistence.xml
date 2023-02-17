@@ -28,6 +28,10 @@
 		<property name="hibernate.format_sql" value="false"/>
 		<property name="hibernate.archive.autodetection" value="class"/>
 
+		<!-- Loading of sample data; runs after table creation -->
+		<property name="javax.persistence.sql-load-script-source"
+			value="META-INF/sql/import.sql"/>
+
 	</properties>
 </persistence-unit>
 

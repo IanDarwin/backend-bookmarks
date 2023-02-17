@@ -33,16 +33,11 @@ public class BookmarksResource implements BookmarksService {
 	@GET
 	@Path("bookmarksByTopicId/{topic}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Bookmark> bookmarksByTopicId(@PathParam("topic") long topic) {
+	public List<Bookmark> bookmarksByTopicId(@PathParam("topic") String topic) {
 		return em.
 			createQuery("from Bookmark where topic_id = ?1", Bookmark.class).
 			setParameter(1, topic).
 			getResultList();
-	}
-
-	@Override
-	public List<Bookmark> bookmarksByTopicId(String topic) {
-		return bookmarksByTopicId((Long.parseLong(topic)));
 	}
 
 	@GET
