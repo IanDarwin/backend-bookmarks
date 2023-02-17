@@ -12,11 +12,10 @@ quarkus.datasource.jdbc.max-size=16
 # security.require-ssl=false
 # server.port=8443
 # server.http.port=8100
-# The keystore file must have been set up using keytool:
+# The keystore file must have been set up using keytool: See ans by "Kadadov" at
+# https://stackoverflow.com/questions/55588382/quarkus-https-restful-service
 # server.ssl.key-store-password=whoKnowsYourSecrets?
 # server.ssl.key-store=src/main/resources/springboot.p12
 # server.ssl.key-store-type=pkcs12
 # server.ssl.key-store-alias=expenses-server
-
-
 
