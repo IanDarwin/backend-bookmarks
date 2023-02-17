@@ -7,4 +7,16 @@ quarkus.datasource.password=sa
 quarkus.datasource.jdbc.url=jdbc:h2:mem:bookmarks
 quarkus.datasource.jdbc.max-size=16
 
+# ssl info
+# Set require-ssl false to allow http: ONLY during debugging
+# security.require-ssl=false
+# server.port=8443
+# server.http.port=8100
+# The keystore file must have been set up using keytool:
+# server.ssl.key-store-password=whoKnowsYourSecrets?
+# server.ssl.key-store=src/main/resources/springboot.p12
+# server.ssl.key-store-type=pkcs12
+# server.ssl.key-store-alias=expenses-server
+
+
 
