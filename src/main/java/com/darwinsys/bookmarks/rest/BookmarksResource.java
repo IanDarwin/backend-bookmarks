@@ -47,7 +47,7 @@ public class BookmarksResource implements BookmarksService {
 		var likePattern = String.format("%%%s%%", pattern.toLowerCase());
 		System.out.println("BookmarksResource::bookmarksBySearch(" + likePattern + ")");
 		return em.
-			createQuery("from Bookmark b where b.description like ?1 order by b.description", Bookmark.class).
+			createQuery("from Bookmark b where lower(b.description) like ?1 order by b.description", Bookmark.class).
 			setParameter(1, likePattern).
 			getResultList();
 	}
@@ -75,15 +75,14 @@ public class BookmarksResource implements BookmarksService {
 	@Path("bookmark")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Transactional
+	@Transactional(Transactional.TxType.REQUIRED)
 	public long postBookmark(Bookmark bookmark) {
+		System.out.println("bookmark = " + bookmark);
 		if (bookmark.getId() == 0) {
 			em.persist(bookmark);
-			em.flush();
-			return bookmark.getId();
 		} else {
 			em.merge(bookmark);
-			return bookmark.getId();
 		}
+		return bookmark.getId();
 	}
 }
