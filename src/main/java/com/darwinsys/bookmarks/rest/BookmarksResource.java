@@ -84,8 +84,10 @@ public class BookmarksResource implements BookmarksService {
 	public long postBookmark(Bookmark bookmark) throws Exception {
 		System.out.println("bookmark = " + bookmark);
 		if (bookmark.getId() == 0) {
+			System.out.println("persisting");
 			em.persist(bookmark);
 		} else {
+			System.out.println("merging");
 			em.merge(bookmark);
 		}
 		// em.flush();

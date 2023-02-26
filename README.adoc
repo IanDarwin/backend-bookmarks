@@ -4,7 +4,7 @@ This project displays one's saved web bookmarks by category, for use by a REST c
 This project provides access to a a tiny sample of bookmarks.
 
 In the full deployment this is excerpted from, a different application writes entries
-into a PostgreSQL or MariaDB relational database that this backend reads from
+into a PostgreSQL relational database that this backend reads from
 (see https://github.com/IanDarwin/bookmark-swingui[]).
 And a third application displays lists for the user to review and open pages in
 the bookmarks.
