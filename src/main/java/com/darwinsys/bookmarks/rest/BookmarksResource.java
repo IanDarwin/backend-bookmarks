@@ -27,7 +27,7 @@ public class BookmarksResource implements BookmarksService {
 	@Path("topics")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Topic> topics() {
-		return em.createQuery("from Topic", Topic.class).getResultList();
+		return em.createQuery("from Topic t order by t.description", Topic.class).getResultList();
 	}
 
 	@GET
@@ -35,7 +35,7 @@ public class BookmarksResource implements BookmarksService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Bookmark> bookmarksByTopicId(@PathParam("topic") String topic) {
 		return em.
-			createQuery("from Bookmark where topic_id = ?1", Bookmark.class).
+			createQuery("from Bookmark b where b.topic.id = ?1 order by b.description", Bookmark.class).
 			setParameter(1, topic).
 			getResultList();
 	}
@@ -47,7 +47,7 @@ public class BookmarksResource implements BookmarksService {
 		var likePattern = String.format("%%%s%%", pattern.toLowerCase());
 		System.out.println("BookmarksResource::bookmarksBySearch(" + likePattern + ")");
 		return em.
-			createQuery("from Bookmark where description like ?1", Bookmark.class).
+			createQuery("from Bookmark b where lower(b.description) like ?1 order by b.description", Bookmark.class).
 			setParameter(1, likePattern).
 			getResultList();
 	}
@@ -58,7 +58,7 @@ public class BookmarksResource implements BookmarksService {
 	public List<Bookmark> bookmarksRegex(@PathParam("regex") String regexString) {
 		List<Bookmark> results = new ArrayList<>();
 		Pattern patt = Pattern.compile(regexString);
-		em.createQuery("from Bookmark", Bookmark.class).getResultList().
+		em.createQuery("from Bookmark b order by b.description", Bookmark.class).getResultList().
 			forEach(b -> { if (patt.matcher(b.getDescription()).find()) results.add(b); } );
 		return results;
 	}
@@ -75,15 +75,14 @@ public class BookmarksResource implements BookmarksService {
 	@Path("bookmark")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Transactional
+	@Transactional(Transactional.TxType.REQUIRED)
 	public long postBookmark(Bookmark bookmark) {
+		System.out.println("bookmark = " + bookmark);
 		if (bookmark.getId() == 0) {
 			em.persist(bookmark);
-			em.flush();
-			return bookmark.getId();
 		} else {
 			em.merge(bookmark);
-			return bookmark.getId();
 		}
+		return bookmark.getId();
 	}
 }
