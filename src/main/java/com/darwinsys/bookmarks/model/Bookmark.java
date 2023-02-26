@@ -10,6 +10,7 @@ public class Bookmark {
 
 	@ManyToOne
 	Topic topic;
+	@Column(name="text")
 	String description;
 	String url;
 
