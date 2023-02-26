@@ -17,9 +17,12 @@ You need a modern Java installed and on your PATH, and Apache Maven installed an
 
 == BEFORE RUNNING
 
+Since I don't want to commit the config files with my live configuration information,
+you have to copy a couple of files:
+
 * In src/main/resources, copy the file `application-resources.properties.sample` to `application-resources.properties`
-* AND copy META-INF/persistence.xml.sample to META-INF/persistence.xml
-** If you miss these steps you will get "no datasource" or "missing database table" messages!
+* In the same place, copy META-INF/persistence.xml.sample to META-INF/persistence.xml
+** If you miss or mess these steps you will get "no datasource" or "missing database table" messages!
 
 == Startup: 
 
