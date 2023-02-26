@@ -3,10 +3,9 @@
 This project displays one's saved web bookmarks by category, for use by a REST client application.
 This project provides read-only access to a a tiny sample of bookmarks.
 
-In the real deployment this is excerpted from, a different application writes entries 
+In the full deployment this is excerpted from, a different application writes entries
 into a PostgreSQL or MariaDB relational database that this backend reads from
-(if you'd call https://github.com/IanDarwin/scripts/blob/master/bookmark[a few-line Unix shell script]
-an application).
+(see https://github.com/IanDarwin/bookmark-swingui[]).
 And a third application displays lists for the user to review and open pages in
 the bookmarks.
 
@@ -19,14 +18,16 @@ You need a modern Java installed and on your PATH, and Apache Maven installed an
 == BEFORE RUNNING
 
 * In src/main/resources, copy the file `application-resources.properties.sample` to `application-resources.properties`
-** If you miss this step you will get "no datasource" messages!
+* AND copy META-INF/persistence.xml.sample to META-INF/persistence.xml
+** If you miss these steps you will get "no datasource" or "missing database table" messages!
 
 == Startup: 
 
-* Run `mvn quarkus:dev`
-* Finally, open a browser to http://localhost:8080/[].
+* Use `make run` or just run `mvn quarkus:dev`
+* Open a browser to http://localhost:8080/[].
+* Make sure all the demos work.
 
-To use a real database, make the obvious changes in two files, `application-resources.properties` and `src/main/resources/META-INF/persistence.xml`
+To use a real database, make the obvious changes in the two files you copied, `application-resources.properties` and `src/main/resources/META-INF/persistence.xml`
 
 == TODO
 
