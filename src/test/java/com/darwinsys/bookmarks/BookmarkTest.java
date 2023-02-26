@@ -1,4 +1,4 @@
-package com.darwinsys.quarkus;
+package com.darwinsys.bookmarks;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
