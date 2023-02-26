@@ -4,24 +4,17 @@ import com.darwinsys.bookmarks.model.*;
 
 import java.util.*;
 
-import javax.persistence.*;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-
-@Path("")
-@Produces(MediaType.APPLICATION_JSON)
 public interface BookmarksService {
-	@GET@Path("topics")
+
 	public List<Topic> topics();
-	@GET@Path("bookmarksByTopicId/{topic}")
-	public List<Bookmark> bookmarksByTopicId(@PathParam("topic") String topicId);
-	@GET@Path("bookmarksSearch/{pattern}")
-	public List<Bookmark> bookmarksSearch(@PathParam("pattern") String pattern);
-	@GET@Path("bookmarksRegex/{regex}")
-	public List<Bookmark> bookmarksRegex(@PathParam("regex") String regexString);
-	@GET@Path("bookmarkById/{id}")
-	public Bookmark bookmarkById(@PathParam("id") long bookmarkId);
+
+	public List<Bookmark> bookmarksByTopicId(String topicId);
+
+	public List<Bookmark> bookmarksSearch(String pattern);
+
+	public List<Bookmark> bookmarksRegex(String regexString);
+	public Bookmark bookmarkById(long bookmarkId);
 	// Inserts into database and returns new pkey
-	@POST@Path("bookmark")
+
 	public long postBookmark(Bookmark newBookmark);
 }
