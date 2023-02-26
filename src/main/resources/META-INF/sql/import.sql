@@ -1,3 +1,4 @@
+create sequence if not exists hibernate_sequence;
 insert into topic(id,description) values('econ', 'The economy');
 insert into topic(id,description) values('pol', 'Politics');
 
