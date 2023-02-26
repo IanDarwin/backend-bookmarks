@@ -18,7 +18,7 @@ public class Topic {
 	}
 
 	public String toString() { 
-		return id;
+		return id + "..." + description;
 	}
 
 	public String getId() {
