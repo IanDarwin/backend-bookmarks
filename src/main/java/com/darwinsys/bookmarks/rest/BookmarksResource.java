@@ -1,23 +1,28 @@
 package com.darwinsys.bookmarks.rest;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.BeforeDestroyed;
+import javax.enterprise.context.Destroyed;
+import javax.enterprise.context.Initialized;
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.TransactionManager;
+import javax.transaction.TransactionScoped;
+import javax.transaction.Transactional;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
 import com.darwinsys.bookmarks.api.BookmarksService;
 import com.darwinsys.bookmarks.model.Bookmark;
 import com.darwinsys.bookmarks.model.Topic;
 
-import java.util.*;
-import java.util.regex.*;
-
-import javax.persistence.*;
-import javax.transaction.Transactional;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 @Path("")
+@ApplicationScoped
 public class BookmarksResource implements BookmarksService {
 
 	@PersistenceContext
@@ -35,7 +40,7 @@ public class BookmarksResource implements BookmarksService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Bookmark> bookmarksByTopicId(@PathParam("topic") String topic) {
 		return em.
-			createQuery("from Bookmark b where b.topic.id = ?1 order by b.description", Bookmark.class).
+			createQuery("from Bookmark b where b.topicId = ?1 order by b.description", Bookmark.class).
 			setParameter(1, topic).
 			getResultList();
 	}
@@ -70,19 +75,36 @@ public class BookmarksResource implements BookmarksService {
 		return em.find(Bookmark.class, id);
 	}
 
-	// Uploads/Inserts into database and returns new pkey
+	// Uploads/Inserts into database and returns new pkey as text
 	@POST
 	@Path("bookmark")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	@Transactional(Transactional.TxType.REQUIRED)
-	public long postBookmark(Bookmark bookmark) {
+	public long postBookmark(Bookmark bookmark) throws Exception {
 		System.out.println("bookmark = " + bookmark);
 		if (bookmark.getId() == 0) {
 			em.persist(bookmark);
 		} else {
 			em.merge(bookmark);
 		}
+		// em.flush();
+		System.out.println("bookmark.getId() = " + bookmark.getId());
 		return bookmark.getId();
+	}
+
+	void onBeginTransaction(@Observes @Initialized(TransactionScoped.class) Object event) {
+		// This gets invoked when a transaction begins.
+		System.out.println("BookmarksResource.onBeginTransaction");
+	}
+
+	void onBeforeEndTransaction(@Observes @BeforeDestroyed(TransactionScoped.class) Object event) {
+		// This gets invoked before a transaction ends (commit or rollback).
+		System.out.println("BookmarksResource.onBeforeEndTransaction");
+	}
+
+	void onAfterEndTransaction(@Observes @Destroyed(TransactionScoped.class) Object event) {
+		// This gets invoked after a transaction ends (commit or rollback).
+		System.out.println("BookmarksResource.onAfterEndTransaction");
 	}
 }

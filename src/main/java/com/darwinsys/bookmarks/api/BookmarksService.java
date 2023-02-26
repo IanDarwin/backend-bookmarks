@@ -16,5 +16,5 @@ public interface BookmarksService {
 	public Bookmark bookmarkById(long bookmarkId);
 	// Inserts into database and returns new pkey
 
-	public long postBookmark(Bookmark newBookmark);
+	public long postBookmark(Bookmark newBookmark) throws Exception;
 }

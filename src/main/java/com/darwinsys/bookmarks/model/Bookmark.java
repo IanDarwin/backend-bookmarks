@@ -8,8 +8,9 @@ public class Bookmark {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	long id;
 
-	@ManyToOne
-	Topic topic;
+	// Should be in a @ManyToOne with Topic, but can't use over REST
+	@Column(name="topic_id")
+	String topicId;
 	@Column(name="text")
 	String description;
 	String url;
@@ -19,28 +20,26 @@ public class Bookmark {
 	}
 
 	// Needed for Q&D demo
-	public Bookmark(Topic topic, String url, String description) {
-		this.topic = topic;
+	public Bookmark(String topicId, String url, String description) {
+		this.topicId = topicId;
 		this.url = url;
 		this.description = description;
 	}
-	public Bookmark(String topic, String url, String description) {
-		this(new Topic(topic), url, description);
-	}
 
 	public String toString() { 
-		return String.format("Bookmark(topic %s, url %s, text %s", topic, url, description);
+		return String.format("Bookmark(topic %s, url %s, text %s)", topicId, url, description);
 	}
 
 	public String toHtml() {
 		return String.format("<a href='%s'>%s</a>", url, description);
 	}
+
 	public long getId() {
 		return id;
 	}
 
 	public String getTopicId() {
-		return topic.getId();
+		return topicId;
 	}
 
 	public String getUrl() {

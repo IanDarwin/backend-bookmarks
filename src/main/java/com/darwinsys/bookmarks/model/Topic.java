@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class Topic {
-	@Id // No generation strategy - inserter must provide!
+	@Id
 	String id;
 	String description;
 
@@ -13,8 +13,9 @@ public class Topic {
 	}
 
 	// Needed for Q&D demo
-	public Topic(String name) {
-		this.id = name;
+	public Topic(String id, String text) {
+		this.id = id;
+		this.description = text;
 	}
 
 	public String toString() { 
