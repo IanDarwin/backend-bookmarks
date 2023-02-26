@@ -70,7 +70,7 @@ public class BookmarksResource implements BookmarksService {
 		return em.find(Bookmark.class, id);
 	}
 
-	// Inserts into database and returns new pkey
+	// Uploads/Inserts into database and returns new pkey
 	@POST
 	@Path("bookmark")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -79,10 +79,11 @@ public class BookmarksResource implements BookmarksService {
 	public long postBookmark(Bookmark bookmark) {
 		if (bookmark.getId() == 0) {
 			em.persist(bookmark);
+			em.flush();
+			return bookmark.getId();
 		} else {
 			em.merge(bookmark);
+			return bookmark.getId();
 		}
-		Bookmark inserted = em.merge(bookmark);
-		return inserted.getId();
 	}
 }
