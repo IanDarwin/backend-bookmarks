@@ -1,6 +1,7 @@
 package com.darwinsys.bookmarks.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Bookmark {
@@ -48,5 +49,21 @@ public class Bookmark {
 
 	public String getDescription() {
 		return description;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Bookmark)) return false;
+		Bookmark bookmark = (Bookmark) o;
+		return getId() == bookmark.getId()
+				&& getTopicId().equals(bookmark.getTopicId())
+				&& getDescription().equals(bookmark.getDescription())
+				&& getUrl().equals(bookmark.getUrl());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getId(), getTopicId(), getDescription(), getUrl());
 	}
 }
