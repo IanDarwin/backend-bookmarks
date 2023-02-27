@@ -1,8 +1,9 @@
 package com.darwinsys.bookmarks.rest;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
+import com.darwinsys.bookmarks.api.BookmarksService;
+import com.darwinsys.bookmarks.model.Bookmark;
+import com.darwinsys.bookmarks.model.Topic;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.BeforeDestroyed;
 import javax.enterprise.context.Destroyed;
@@ -10,22 +11,19 @@ import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.TransactionManager;
 import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-
-import com.darwinsys.bookmarks.api.BookmarksService;
-import com.darwinsys.bookmarks.model.Bookmark;
-import com.darwinsys.bookmarks.model.Topic;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 @Path("")
 @ApplicationScoped
 public class BookmarksResource implements BookmarksService {
 
-	@PersistenceContext
+	@Inject
 	EntityManager em;
 
 	@GET
