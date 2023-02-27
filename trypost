@@ -1,1 +1,2 @@
 curl -v -d @try.json -H Content-type:application/json http://localhost:8080/bookmark
+echo ""
