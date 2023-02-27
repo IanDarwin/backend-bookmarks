@@ -1,15 +1,18 @@
 package com.darwinsys.bookmarks.model;
-
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Represents one bookmarked URL with a description.
+ * JPA Entity field annotations used.
+ */
 @Entity
 public class Bookmark {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	long id;
 
-	// Should be in a @ManyToOne with Topic, but can't use over REST
+	// Should be in a @ManyToOne with Topic, but String easier over REST
 	@Column(name="topic_id")
 	String topicId;
 	@Column(name="text")
