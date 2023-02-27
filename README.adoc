@@ -25,6 +25,13 @@ you have to copy a couple of files:
 * In the same place, copy META-INF/persistence.xml.sample to META-INF/persistence.xml
 ** If you miss or mess these steps you will get "no datasource" or "missing database table" messages!
 
+Sample commands for Unix/Linux:
+
+	cd src/main/resources
+	cp application-resources.properties.sample application-resources.properties
+	cp META-INF/persistence.xml.sample META-INF/persistence.xml
+	cd -
+
 == Startup: 
 
 * Use `make run` or just run `mvn quarkus:dev`
