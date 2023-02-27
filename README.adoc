@@ -1,16 +1,16 @@
 == Bookmarks REST via quarkus and Java EE
 
 This project displays one's saved web bookmarks by category, for use by a REST client application.
-This project provides access to a a tiny sample of bookmarks.
+As distributed it provides access to a tiny sample of bookmarks, loaded from import.sql.
+The project uses https://quarkus.io[Quarkus], "the Supersonic Subatomic Java Framework."
+Quarkus is a good way to build mini- and micro-services.
 
-In the full deployment this is excerpted from, a different application writes entries
+In production, a different application writes entries
 into a PostgreSQL relational database that this backend reads from
 (see https://github.com/IanDarwin/bookmark-swingui[]).
 And a third application displays lists for the user to review and open pages in
 the bookmarks.
-
-This project uses https://quarkus.io[Quarkus], "the Supersonic Subatomic Java Framework."
-Quarkus is a good way to build mini- and micro-services.
+There's a mobile version partly written, written in the https://flutter.dev[Flutter] cross-platform SDK.
 
 == Prerequisites:
 
