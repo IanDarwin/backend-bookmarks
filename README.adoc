@@ -21,14 +21,14 @@ You need a modern Java installed and on your PATH, and Apache Maven installed an
 Since I don't want to commit the config files with my live configuration information,
 you have to copy a couple of files:
 
-* In src/main/resources, copy the file `application-resources.properties.sample` to `application-resources.properties`
+* In src/main/resources, copy the file `application.properties.sample` to `application.properties`
 * In the same place, copy META-INF/persistence.xml.sample to META-INF/persistence.xml
 ** If you miss or mess these steps you will get "no datasource" or "missing database table" messages!
 
 Sample commands for Unix/Linux:
 
 	cd src/main/resources
-	cp application-resources.properties.sample application-resources.properties
+	cp application.properties.sample application.properties
 	cp META-INF/persistence.xml.sample META-INF/persistence.xml
 	cd -
 
@@ -38,7 +38,8 @@ Sample commands for Unix/Linux:
 * Open a browser to http://localhost:8080/[].
 * Make sure all the demos work.
 
-To use a real database, make the obvious changes in the two files you copied, `application-resources.properties` and `src/main/resources/META-INF/persistence.xml`
+To use a real database, make the obvious changes in the two files you copied,
+`application.properties` and `src/main/resources/META-INF/persistence.xml`
 
 == TODO
 
