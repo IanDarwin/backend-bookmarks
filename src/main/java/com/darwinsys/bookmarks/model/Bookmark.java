@@ -27,7 +27,7 @@ public class Bookmark {
 	}
 
 	public String toString() { 
-		return String.format("Bookmark(topic %s, url %s, text %s)", topicId, url, description);
+		return String.format("Bookmark(#%d, topic %s, url %s, text %s)", id, topicId, url, description);
 	}
 
 	public String toHtml() {
