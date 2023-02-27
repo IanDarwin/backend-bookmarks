@@ -37,22 +37,23 @@ Sample commands for Unix/Linux:
 * Use `make run` or just run `mvn quarkus:dev`
 * Open a browser to http://localhost:8080/[].
 * Make sure all the demos work.
+* The POST demo isn't on the web page; run the script `trypost` in a shell window.
 
 To use a real database, make the obvious changes in the two files you copied,
 `application.properties` and `src/main/resources/META-INF/persistence.xml`
 
 == TODO
 
-Don't just "Consider adding security." **Do it**, before you ever go live,
+"Consider adding security?" No. **Do it**, before you go live with this,
 now that this API has some write modes (no longer read-only).
 See, for example, https://quarkus.io/guides/security-basic-authentication-tutorial[].
 
 == Packaging etc.
 
-To run tests, or package, you have to use the `mvnw` front-end to Maven.
+To run tests, or package, you may have to use the `mvnw` front-end to Maven.
 See README-quarkus.md for details.
 
-== Docker
+== Docker (completely untested)
 
 I did this already: `./mvnw quarkus:add-extension -Dextensions="container-image-docker"`
 
