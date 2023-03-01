@@ -12,6 +12,16 @@ public class Bookmark {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	long id;
 
+	// Just for debugging - Delete for production!!
+	@PrePersist
+	public void prePersist() {
+		System.out.println("Bookmark.prePersist: id = " + id);
+	}
+	@PostPersist
+	public void postPersist() {
+		System.out.println("Bookmark.postPersist: id = " + id);
+	}
+
 	// Should be in a @ManyToOne with Topic, but String easier over REST
 	@Column(name="topic_id")
 	String topicId;
