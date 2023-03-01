@@ -4,7 +4,7 @@
 		http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2_1.xsd"
 	version="2.1">
 
-<persistence-unit name="bookmarks">
+<persistence-unit name="bookmarks" transaction-type="JTA">
 	<exclude-unlisted-classes>false</exclude-unlisted-classes>
 	<properties>
 		<property name="javax.persistence.provider" value="org.hibernate.ejb.HibernatePersistence"/>
