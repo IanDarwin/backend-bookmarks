@@ -1,26 +1,25 @@
 package com.darwinsys.bookmarks.rest;
 
-import com.darwinsys.bookmarks.api.BookmarksService;
-import com.darwinsys.bookmarks.model.Bookmark;
-import com.darwinsys.bookmarks.model.Topic;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.BeforeDestroyed;
 import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.TransactionScoped;
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
+
+import com.darwinsys.bookmarks.api.BookmarksService;
+import com.darwinsys.bookmarks.model.Bookmark;
+import com.darwinsys.bookmarks.model.Topic;
 
 @ApplicationScoped
 public class BookmarksDaoJpa implements BookmarksService {
 
-	@Inject
+	@PersistenceContext(unitName="bookmarks")
 	EntityManager em;
 
 	public List<Topic> topics() {
@@ -55,8 +54,7 @@ public class BookmarksDaoJpa implements BookmarksService {
 		return em.find(Bookmark.class, id);
 	}
 
-	// Uploads/Inserts into database and returns new pkey as text
-	@Transactional(Transactional.TxType.REQUIRED)
+	// Uploads/Inserts into database and returns new pkey #
 	public long postBookmark(Bookmark bookmark) throws Exception {
 		if (bookmark.getId() == 0) {
 			System.out.println("Persisting " + bookmark);
@@ -65,6 +63,9 @@ public class BookmarksDaoJpa implements BookmarksService {
 			System.out.println("Merging " + bookmark);
 			em.merge(bookmark);
 		}
+		// To be portable, one should flush() before getting the id.
+		// But this causes "no transaction" exception at present.
+		// System.out.println("About to flush em");
 		// em.flush();
 		System.out.println("bookmark.getId() = " + bookmark.getId());
 		return bookmark.getId();
