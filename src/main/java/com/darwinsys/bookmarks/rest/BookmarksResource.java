@@ -3,6 +3,7 @@ package com.darwinsys.bookmarks.rest;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -57,6 +58,7 @@ public class BookmarksResource implements BookmarksService {
 	@Path("bookmark")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
+	@Transactional(Transactional.TxType.REQUIRED)
 	public long postBookmark(Bookmark bookmark) throws Exception {
 		return dao.postBookmark(bookmark);
 	}
