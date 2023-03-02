@@ -64,25 +64,7 @@ public class BookmarksDaoJpa implements BookmarksService {
 			em.merge(bookmark);
 		}
 		// To be portable, one should flush() before getting the id.
-		// But this causes "no transaction" exception at present.
-		// System.out.println("About to flush em");
-		// em.flush();
-		System.out.println("bookmark.getId() = " + bookmark.getId());
+		em.flush();
 		return bookmark.getId();
-	}
-
-	void onBeginTransaction(@Observes @Initialized(TransactionScoped.class) Object event) {
-		// This gets invoked when a transaction begins.
-		System.out.println("BookmarksResource.onBeginTransaction: " + event);
-	}
-
-	void onBeforeEndTransaction(@Observes @BeforeDestroyed(TransactionScoped.class) Object event) {
-		// This gets invoked before a transaction ends (commit or rollback).
-		System.out.println("BookmarksResource.onBeforeEndTransaction");
-	}
-
-	 void onAfterEndTransaction(@Observes @Destroyed(TransactionScoped.class) Object event) {
-		// This gets invoked after a transaction ends (commit or rollback).
-		System.out.println("BookmarksResource.onAfterEndTransaction");
 	}
 }

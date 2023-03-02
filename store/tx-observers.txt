@@ -1,0 +1,15 @@
+	// Copy these methods into the object using JPA to watch TX occurrence.
+	void onBeginTransaction(@Observes @Initialized(TransactionScoped.class) Object event) {
+		// This gets invoked when a transaction begins.
+		System.out.println("BookmarksResource.onBeginTransaction: " + event);
+	}
+
+	void onBeforeEndTransaction(@Observes @BeforeDestroyed(TransactionScoped.class) Object event) {
+		// This gets invoked before a transaction ends (commit or rollback).
+		System.out.println("BookmarksResource.onBeforeEndTransaction");
+	}
+
+	 void onAfterEndTransaction(@Observes @Destroyed(TransactionScoped.class) Object event) {
+		// This gets invoked after a transaction ends (commit or rollback).
+		System.out.println("BookmarksResource.onAfterEndTransaction");
+	}
